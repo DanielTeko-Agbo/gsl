@@ -26,7 +26,6 @@ debugpy==1.6.2
 decorator==5.1.1
 defusedxml==0.7.1
 distro==1.7.0
-distro-info===1.1build1
 dnspython==2.2.1
 duplicity==0.8.21
 entrypoints==0.4
@@ -113,11 +112,8 @@ PyNaCl==1.5.0
 pyparsing==2.4.7
 pyRFC3339==1.1
 pyrsistent==0.18.1
-python-apt==2.3.0+ubuntu2.1
 python-dateutil==2.8.2
-python-debian===0.1.43ubuntu1
 pytz==2022.1
-pytz-deprecation-shim==0.1.0.post0
 pyxdg==0.27
 PyYAML==5.4.1
 pyzmq==23.2.0
@@ -131,11 +127,9 @@ semver==2.13.0
 Send2Trash==1.8.0
 six==1.16.0
 smmap==5.0.0
-soupsieve==2.3.2.post1
 stack-data==0.3.0
 streamlit==1.11.1
 streamlit-webrtc==0.42.0
-systemd-python==234
 terminado==0.15.0
 threadpoolctl==3.1.0
 tinycss2==1.1.1
@@ -146,10 +140,7 @@ traitlets==5.3.0
 typing_extensions==4.3.0
 tzdata==2022.1
 tzlocal==4.2
-ubuntu-advantage-tools==27.9
-ubuntu-drivers-common==0.0.0
 ufw==0.36.1
-unattended-upgrades==0.1
 urllib3==1.26.5
 usb-creator==0.3.7
 validators==0.20.0
