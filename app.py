@@ -1,5 +1,5 @@
 import numpy as np
-import cv2 as cv
+import cv2
 import mediapipe as mp
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, RTCConfiguration,WebRtcMode
@@ -15,11 +15,11 @@ holistic_model = mp.solutions.holistic # Holistic model
 drawing_util = mp.solutions.drawing_utils # Drawing utilities
 
 def kp_detection(image, model):
-    image = cv.cvtColor(image, cv.COLOR_BGR2RGB) # Converting image to RGB from opencv's default BGR.
+    image = cv2.cv2tColor(image, cv2.COLOR_BGR2RGB) # Converting image to RGB from opencv2's default BGR.
     image.flags.writeable = False  # Setting image to not writable.
     result = model.process(image) # Detecting keypoints from image.
     image.flags.writeable = True   # Setting image to writable.
-    image = cv.cvtColor(image, cv.COLOR_RGB2BGR) # Converting image back to BGR from RGB.
+    image = cv2.cv2tColor(image, cv2.COLOR_RGB2BGR) # Converting image back to BGR from RGB.
     return image, result
 
 def kp_drawing(image, results):
@@ -78,7 +78,7 @@ def extract_keypoints(result):
 
     return np.concatenate([lh, rh])      
 
-class OpenCVVideoProcessor(VideoProcessorBase):
+class OpencvVideoProcessor(VideoProcessorBase):
     def __init__(self):
         self.detection_confidence = 0.5
         self.tracking_confidence = 0.5
@@ -91,7 +91,7 @@ class OpenCVVideoProcessor(VideoProcessorBase):
         with holistic_model.Holistic(min_detection_confidence=self.detection_confidence, min_tracking_confidence=self.tracking_confidence) as holistic:
             while True:
                 #img = frame.to_ndarray(format="bgr24")
-                flip_img = cv.flip(img,1)
+                flip_img = cv2.flip(img,1)
 
                 # Make detections
                 image, results = kp_detection(flip_img, holistic)
@@ -106,14 +106,14 @@ class OpenCVVideoProcessor(VideoProcessorBase):
                 prediction = self.model.predict([keypoints])
 
                 # Displaying predictions
-                cv.rectangle(image, (0,2), (60,40), (117,117,117), -1)
-                cv.putText(image, str(prediction[0]), (10, 30), cv.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 3, cv.LINE_AA)
+                cv2.rectangle(image, (0,2), (60,40), (117,117,117), -1)
+                cv2.putText(image, str(prediction[0]), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 3, cv2.LINE_AA)
 
                 return av.VideoFrame.from_ndarray(image,format="bgr24")
 
 stream = webrtc_streamer(
     key="opencv-filter",
-    video_processor_factory=OpenCVVideoProcessor,
+    video_processor_factory=OpencvVideoProcessor,
 )
 
 if stream.video_processor:
