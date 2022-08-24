@@ -94,7 +94,6 @@ ptyprocess==0.7.0
 pure-eval==0.2.2
 pyarrow==9.0.0
 pycparser==2.21
-pycups==2.0.1
 pydeck==0.7.1
 pyee==9.0.4
 Pygments==2.12.0
