@@ -76,7 +76,11 @@ def extract_keypoints(result):
         # lh has the same size in both instances.
         lh = np.zeros(63)
 
-    return np.concatenate([lh, rh])      
+    return np.concatenate([lh, rh])    
+
+RTC_CONFIGURATION = RTCConfiguration(
+    {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+)  
 
 class OpenCVVideoProcessor(VideoProcessorBase):
     def __init__(self):
@@ -114,6 +118,7 @@ class OpenCVVideoProcessor(VideoProcessorBase):
 stream = webrtc_streamer(
     key="opencv-filter",
     video_processor_factory=OpenCVVideoProcessor,
+    rtc_configuration=RTC_CONFIGURATION
 )
 
 if stream.video_processor:
