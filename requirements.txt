@@ -44,7 +44,6 @@ mediapipe==0.8.10.1
 nest-asyncio==1.5.5
 netifaces==0.11.0
 numpy==1.23.2
-opencv-contrib-python==4.6.0.66
 opencv-python-headless==4.6.0.66
 packaging==21.3
 pandas==1.4.3
@@ -67,7 +66,6 @@ Pympler==1.0.1
 pyparsing==3.0.9
 pyrsistent==0.18.1
 python-dateutil==2.8.2
-python-opencv==1.0.0.14
 pytz==2022.2.1
 pytz-deprecation-shim==0.1.0.post0
 pyzmq==23.2.1
@@ -95,3 +93,4 @@ watchdog==2.1.9
 wcwidth==0.2.5
 widgetsnbextension==4.0.2
 zipp==3.8.1
+
