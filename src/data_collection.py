@@ -52,4 +52,3 @@ def data_collection(signs, img_num):
         cv.destroyAllWindows() # Close all OpenCV windows.
     f.close()
 
-data_collection(list('123'), 3)
