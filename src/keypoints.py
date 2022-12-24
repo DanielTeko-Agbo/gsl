@@ -2,7 +2,6 @@ import mediapipe as mp
 import cv2 as cv
 import numpy as np
 
-man = "hey There"
 holistic_model = mp.solutions.holistic  # Holistic model to determine keypoints.
 drawing_util = mp.solutions.drawing_utils  # Drawing utilities to draw keypoints.
 

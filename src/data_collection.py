@@ -4,7 +4,7 @@ import csv
 import numpy as np
 import datetime
 
-from keypoints import holistic_model, kp_detection, kp_drawing, extract_keypoints, man
+from keypoints import holistic_model, kp_detection, kp_drawing, extract_keypoints
 
 # Data collection function
 def data_collection(signs, img_num):
@@ -52,3 +52,4 @@ def data_collection(signs, img_num):
         cv.destroyAllWindows() # Close all OpenCV windows.
     f.close()
 
+data_collection(['stand'], 10)  

@@ -3,6 +3,7 @@ import cv2 as cv
 import mediapipe as mp
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, RTCConfiguration,WebRtcMode
+from streamlit_option_menu import option_menu
 import av
 import pickle
 import sklearn
@@ -86,7 +87,7 @@ class OpenCVVideoProcessor(VideoProcessorBase):
     def __init__(self):
         self.detection_confidence = 0.5
         self.tracking_confidence = 0.5
-        self.model = pickle.load(open('models/model.pkl', 'rb'))
+        self.model = pickle.load(open('../models/model.pkl', 'rb'))
 
     def recv(self, frame):
         img = frame.to_ndarray(format='bgr24')
@@ -108,21 +109,63 @@ class OpenCVVideoProcessor(VideoProcessorBase):
                 
                 # Make predictions
                 prediction = self.model.predict([keypoints])
-
+              
                 # Displaying predictions
                 cv.rectangle(image, (0,2), (60,40), (117,117,117), -1)
                 cv.putText(image, str(prediction[0]), (10, 30), cv.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 3, cv.LINE_AA)
 
                 return av.VideoFrame.from_ndarray(image,format="bgr24")
 
-stream = webrtc_streamer(
+# stream = webrtc_streamer(
+#     key="opencv-filter",
+#     video_processor_factory=OpenCVVideoProcessor,
+#     rtc_configuration=RTC_CONFIGURATION
+# )
+
+# if stream.video_processor:
+#     stream.video_processor.detection_confidence = st.sidebar.slider("Detection Confidence", 0.00, 1.00, 0.50, 0.01)
+#     stream.video_processor.tracking_confidence = st.sidebar.slider("Tracking Confidence", 0.00, 1.00, 0.50, 0.01)
+
+
+selected = option_menu(
+    menu_title = None, 
+    options = ["Home", "About"],
+    default_index = 0,
+    icons = ['house', 'book'],
+    orientation = "horizontal",
+    styles = {
+        "container" : {
+            "padding" : "0px",
+            "margin" : "0px",
+        },
+        "nav-link" : {
+            "padding" : "5px",
+            "margin" : "0px",
+            "--hover-color" : "#f35952",
+            "font-weight" : "bold",
+            "font-size" : "1rem",
+        },
+        "icon" : {
+            "color" : "#fff"
+        }
+    }
+)
+
+if selected == "Home":
+    stream = webrtc_streamer(
     key="opencv-filter",
     video_processor_factory=OpenCVVideoProcessor,
     rtc_configuration=RTC_CONFIGURATION
-)
+    )
 
-if stream.video_processor:
-    stream.video_processor.detection_confidence = st.sidebar.slider("Detection Confidence", 0.00, 1.00, 0.50, 0.01)
-    stream.video_processor.tracking_confidence = st.sidebar.slider("Tracking Confidence", 0.00, 1.00, 0.50, 0.01)
-
-
+if selected == "About":
+    st.markdown("""
+        ### ABOUT THIS PROJECT.
+        This project seeks to bridge the gap between the hearing and the non-hearing community by translating into text signs of the Ghanaian Sign Language.
+        
+        Although, it is still in the developmental phase, this project we can recognise a few static gestures or signs of the Ghanaian Sign Language, but future work will be done to improve upon it's functionality.
+        
+        Signs that can currently be recognised includes;
+        - Digits (0 to 9)
+        - 
+    """)
