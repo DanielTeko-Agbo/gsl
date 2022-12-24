@@ -167,5 +167,7 @@ if selected == "About":
         
         Signs that can currently be recognised includes;
         - Digits (0 to 9)
-        - 
+        - Equal
+        - Positive
+        - Negative
     """)
