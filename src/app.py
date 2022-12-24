@@ -87,7 +87,7 @@ class OpenCVVideoProcessor(VideoProcessorBase):
     def __init__(self):
         self.detection_confidence = 0.5
         self.tracking_confidence = 0.5
-        self.model = pickle.load(open('../models/model.pkl', 'rb'))
+        self.model = pickle.load(open('./models/model.pkl', 'rb'))
 
     def recv(self, frame):
         img = frame.to_ndarray(format='bgr24')
