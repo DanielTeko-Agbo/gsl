@@ -109,10 +109,13 @@ class OpenCVVideoProcessor(VideoProcessorBase):
                 
                 # Make predictions
                 prediction = self.model.predict([keypoints])
+
+                # Labels 
+                labels = [' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'equal', 'negative', 'positive']
               
                 # Displaying predictions
                 cv.rectangle(image, (0,2), (60,40), (117,117,117), -1)
-                cv.putText(image, str(prediction[0]), (10, 30), cv.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 3, cv.LINE_AA)
+                cv.putText(image, str(labels[prediction[0]]), (10, 30), cv.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 3, cv.LINE_AA)
 
                 return av.VideoFrame.from_ndarray(image,format="bgr24")
 
